@@ -1,10 +1,12 @@
 @import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import "~@blueprintjs/table/lib/css/table.css";
 
 :root{
   --white: #FFF;
 
+  --gray-50: #ecf1f5;
   --gray-100: #a4afb3;
   --gray-200: #8a9aa7;
   --gray-300: #627482;
@@ -12,6 +14,9 @@
   --gray-600: #3a4a59;
   --gray-900: #30404d;
   --gray-1000: #222b32;
+
+  --blue-50: #cae3eb;
+  --blue-400:  #478fbc;
 }
 
 *{
@@ -23,4 +28,5 @@
 body {
   font: 16px "Helvetica Neue",Arial, sans-serif;
   color: #121214;
+  background-color: var(--gray-50);
 }
