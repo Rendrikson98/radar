@@ -1,9 +1,15 @@
-import Menu from '../components/Menu/index';
+import Menu from '../components/Menu';
+import SideMenu from '../components/SideMenu/index';
+
+import './styles.scss';
 
 export const Radar = () => {
   return (
-    <>
-      <Menu />
-    </>
+    <div className="container">
+      <SideMenu />
+      <div className="contentWrap">
+        <Menu />
+      </div>
+    </div>
   );
 };
