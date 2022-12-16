@@ -1,7 +1,7 @@
 @import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
-@import "~@blueprintjs/table/lib/css/table.css";
+@import "~@blueprintjs/select/lib/css/blueprint-select.css";
 
 :root{
   --white: #FFF;
@@ -10,6 +10,7 @@
   --gray-100: #a4afb3;
   --gray-200: #8a9aa7;
   --gray-300: #627482;
+  --gray-400: #646769;
   --gray-500: #394b59;
   --gray-600: #3a4a59;
   --gray-900: #30404d;
@@ -17,6 +18,10 @@
 
   --blue-50: #cae3eb;
   --blue-400:  #478fbc;
+
+  --red-300: #e73d43;
+
+  --orange-300: #fd9850;
 }
 
 *{
