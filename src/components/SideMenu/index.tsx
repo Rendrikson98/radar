@@ -13,6 +13,7 @@ import {
 } from '@blueprintjs/core';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { menuModel } from '../../models';
 import { SideMenuModel } from '../../models/sideMenuModel';
 import {
   activeOption,
@@ -25,6 +26,7 @@ const Menu = () => {
   const sideMenuInformation: SideMenuModel[] = useAppSelector(
     (state) => state.sideMenuState
   );
+
   const dispatch = useAppDispatch();
 
   const [sideMenuOption, setSideMenuOption] =

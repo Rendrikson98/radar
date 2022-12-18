@@ -3,7 +3,7 @@ import { Select2 } from '@blueprintjs/select';
 import { ItemRenderer } from '@blueprintjs/select/lib/esm/common';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { DataModel, SideMenuModel } from '../../models';
+import { DataModel, menuModel, SideMenuModel } from '../../models';
 import { data } from '../../services/data';
 
 import './styles.scss';
@@ -17,6 +17,7 @@ const Table = () => {
   const sideMenuInformation: SideMenuModel[] = useAppSelector(
     (state) => state.sideMenuState
   );
+  const menuInformation: menuModel = useAppSelector((state) => state.menuState);
 
   const [selectedFilm, setSelectedFilm] = useState<string>();
   const [dataTable, setDataTable] = useState<DataModel[]>(data);
@@ -37,7 +38,10 @@ const Table = () => {
   };
 
   useEffect(() => {
-    if (verifyFilterPropertie().isActivePropertie) {
+    if (
+      verifyFilterPropertie().isActivePropertie &&
+      !menuInformation.searchTitle
+    ) {
       let newData: DataModel[] = [];
       data.map((item) => {
         verifyFilterPropertie().properties.map((status) => {
@@ -47,10 +51,35 @@ const Table = () => {
         });
       });
       setDataTable(newData);
+    } else if (
+      !verifyFilterPropertie().isActivePropertie &&
+      menuInformation.searchTitle
+    ) {
+      const result = data.filter((item) =>
+        item.title.toLowerCase().match(menuInformation.searchTitle)
+      );
+      setDataTable(result);
+    } else if (
+      verifyFilterPropertie().isActivePropertie &&
+      menuInformation.searchTitle
+    ) {
+      let newData: DataModel[] = [];
+      data.map((item) => {
+        verifyFilterPropertie().properties.map((status) => {
+          if (item.status === status) {
+            newData.push(item);
+          }
+        });
+      });
+
+      const result = newData.filter((item) =>
+        item.title.toLowerCase().match(menuInformation.searchTitle)
+      );
+      setDataTable(result);
     } else {
       setDataTable(data);
     }
-  }, [sideMenuInformation]);
+  }, [sideMenuInformation, menuInformation]);
 
   const renderFilm: ItemRenderer<string> = (
     film,

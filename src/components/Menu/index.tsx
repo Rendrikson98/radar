@@ -8,8 +8,14 @@ import {
   NavbarGroup,
   Tag,
 } from '@blueprintjs/core';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { menuModel } from '../../models';
+import { handleSearchTitle } from '../../store/features/menuSlice';
 import './styles.scss';
 const Menu = () => {
+  const menuInformation: menuModel = useAppSelector((state) => state.menuState);
+  const dispatch = useAppDispatch();
+
   return (
     <Navbar className="navbarWrap" style={{ background: '#ecf1f5' }}>
       <NavbarGroup
@@ -24,11 +30,14 @@ const Menu = () => {
           <InputGroup
             type="search"
             leftElement={<Icon icon="search" />}
-            placeholder="Find tags"
+            placeholder="Search for Alerts..."
             rightElement={
               <Tag minimal={true} round={true}>
                 {Math.floor(10000 / Math.max(1, Math.pow(2, 2)))}
               </Tag>
+            }
+            onChange={(event) =>
+              dispatch(handleSearchTitle(event.target.value))
             }
           />
           <Button
