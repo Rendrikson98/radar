@@ -11,10 +11,10 @@ import {
   NavbarHeading,
   Alignment,
 } from '@blueprintjs/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { SideMenuModel } from '../../models/sideMenuModel';
-import * as actions from '../../store/actions';
+import { openOrCloseProperties } from '../../store/features/sideMenuSlice';
 
 import './styles.scss';
 
@@ -22,13 +22,13 @@ const Menu = () => {
   const sideMenuInformation: SideMenuModel[] = useAppSelector(
     (state) => state.sideMenuState
   );
+  const dispatch = useAppDispatch();
 
   const [sideMenuOption, setSideMenuOption] =
     useState<SideMenuModel[]>(sideMenuInformation);
 
-  const [open, setOpen] = useState(false);
   const handleButton = (index: number): void => {
-    //alterar por redux
+    dispatch(openOrCloseProperties(index));
   };
 
   const handleFilterProperties = (name: string): void => {
@@ -43,7 +43,10 @@ const Menu = () => {
     }
   };
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    setSideMenuOption(sideMenuInformation);
+  }, [sideMenuInformation]);
+
   return (
     <nav className="navWrap">
       <Navbar className="navbarLeft" style={{ background: '#30404d' }}>
@@ -77,27 +80,30 @@ const Menu = () => {
         onChange={(event) => handleFilterProperties(event.target.value)}
       />
 
-      {sideMenuOption?.map((item, index) => (
-        <ButtonGroup vertical>
-          <Button
-            large={true}
-            rightIcon={
-              <Icon icon="chevron-right" style={{ color: '#a4afb3' }} />
-            }
-            style={{ background: '#394b59', color: '#a4afb3' }}
-            text={item.name}
-            alignText="left"
-            onClick={() => handleButton(index)}
-          />
-          <Collapse isOpen={open} className="collapseSideBar">
-            <Pre>
-              {item.options?.map((option) => (
-                <Tag icon="small-cross">{option.name}</Tag>
-              ))}
-            </Pre>
-          </Collapse>
-        </ButtonGroup>
-      ))}
+      {sideMenuOption?.map((item) => {
+        console.log(item.isOpen);
+        return (
+          <ButtonGroup vertical>
+            <Button
+              large={true}
+              rightIcon={
+                <Icon icon="chevron-right" style={{ color: '#a4afb3' }} />
+              }
+              style={{ background: '#394b59', color: '#a4afb3' }}
+              text={item.name}
+              alignText="left"
+              onClick={() => handleButton(item.id)}
+            />
+            <Collapse isOpen={item.isOpen} className="collapseSideBar">
+              <Pre>
+                {item.options?.map((option) => (
+                  <Tag icon="small-cross">{option.name}</Tag>
+                ))}
+              </Pre>
+            </Collapse>
+          </ButtonGroup>
+        );
+      })}
     </nav>
   );
 };

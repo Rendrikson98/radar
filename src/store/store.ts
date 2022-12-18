@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { sideMenuReducer } from './reducers/sideMenuReducer';
+import SideMenuReducer from './features/sideMenuSlice';
 
 export const store = configureStore({
   reducer: {
-    sideMenuState: sideMenuReducer,
+    sideMenuState: SideMenuReducer,
   },
 });
 

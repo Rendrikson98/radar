@@ -1,9 +1,9 @@
-import { updateObject } from '../../helpers/updateObject';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SideMenuModel } from '../../models/sideMenuModel';
-import { ActionTypes } from '../actions/action-types';
 
 const initialState: SideMenuModel[] = [
   {
+    id: 0,
     name: 'Status',
     isOpen: false,
     options: [
@@ -22,38 +22,54 @@ const initialState: SideMenuModel[] = [
     ],
   },
   {
+    id: 1,
     name: 'Time',
     isOpen: false,
   },
   {
+    id: 2,
     name: 'Assignee',
     isOpen: false,
   },
   {
+    id: 3,
     name: 'Watcher',
     isOpen: false,
   },
   {
+    id: 4,
     name: 'Counterparty',
     isOpen: false,
   },
   {
+    id: 5,
     name: 'Saverity',
     isOpen: false,
   },
   {
+    id: 6,
     name: 'Source',
     isOpen: false,
   },
   {
+    id: 7,
     name: 'Trader',
     isOpen: false,
   },
 ];
 
-export const sideMenuReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+const sideMenuSlice = createSlice({
+  name: 'OPEN_OR_CLOSE_PROPERTIES',
+  initialState,
+  reducers: {
+    openOrCloseProperties(
+      state: SideMenuModel[],
+      action: PayloadAction<number>
+    ) {
+      state[action.payload].isOpen = !state[action.payload].isOpen;
+    },
+  },
+});
+
+export const { openOrCloseProperties } = sideMenuSlice.actions;
+export default sideMenuSlice.reducer;
