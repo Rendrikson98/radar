@@ -88,15 +88,17 @@
     flex-wrap: wrap;
     gap: 0.4rem;
    
-
     span{
-      background: var(--gray-500);
       cursor: pointer;
       font-size: 0.9rem;
       span{
         padding: 0.2rem;
-        color: var(--gray-100);
+        
       }
     }
   }
+}
+
+.tagSideMenu {
+  background: var(--gray-500) !important;
 }

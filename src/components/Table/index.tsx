@@ -1,12 +1,56 @@
 import { Button, MenuItem, Tag } from '@blueprintjs/core';
 import { Select2 } from '@blueprintjs/select';
 import { ItemRenderer } from '@blueprintjs/select/lib/esm/common';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { DataModel, SideMenuModel } from '../../models';
+import { data } from '../../services/data';
 
 import './styles.scss';
 
+type VerifyFilterPropertirType = {
+  isActivePropertie: boolean;
+  properties: Array<string>;
+};
+
 const Table = () => {
+  const sideMenuInformation: SideMenuModel[] = useAppSelector(
+    (state) => state.sideMenuState
+  );
+
   const [selectedFilm, setSelectedFilm] = useState<string>();
+  const [dataTable, setDataTable] = useState<DataModel[]>(data);
+
+  const verifyFilterPropertie = (): VerifyFilterPropertirType => {
+    let properties: Array<string> = [];
+
+    sideMenuInformation.forEach((item) =>
+      item.options.forEach(
+        (option) => option.selected && properties.push(option.name as string)
+      )
+    );
+
+    return {
+      isActivePropertie: properties.length > 0,
+      properties,
+    };
+  };
+
+  useEffect(() => {
+    if (verifyFilterPropertie().isActivePropertie) {
+      let newData: DataModel[] = [];
+      data.map((item) => {
+        verifyFilterPropertie().properties.map((status) => {
+          if (item.status === status) {
+            newData.push(item);
+          }
+        });
+      });
+      setDataTable(newData);
+    } else {
+      setDataTable(data);
+    }
+  }, [sideMenuInformation]);
 
   const renderFilm: ItemRenderer<string> = (
     film,
@@ -26,6 +70,12 @@ const Table = () => {
         text={film}
       />
     );
+  };
+
+  const backgroundColor = {
+    red: 'backgroundRed',
+    orange: 'backgroundOrange',
+    gray: 'backgroundGray',
   };
   return (
     <table className="table">
@@ -62,45 +112,21 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>BUY of $34.9M USD of LOPR on 1/29/15</td>
-          <td>
-            <div className="square backgroundRed" />
-          </td>
-          <td>
-            <Tag className="tagTable">open</Tag>
-          </td>
-          <td>Prasanta Shivakrishnan</td>
-          <td>Guerra Corporation</td>
-          <td>PRHI-Z53</td>
-          <td>Bank trading</td>
-        </tr>
-        <tr>
-          <td>BUY of $34.9M USD of LOPR on 1/29/15</td>
-          <td>
-            <div className="square backgroundOrange" />
-          </td>
-          <td>
-            <Tag className="tagTable">closed</Tag>
-          </td>
-          <td>Prasanta Shivakrishnan</td>
-          <td>Guerra Corporation</td>
-          <td>PRHI-Z53</td>
-          <td>Bank trading</td>
-        </tr>
-        <tr>
-          <td>BUY of $34.9M USD of LOPR on 1/29/15</td>
-          <td>
-            <div className="square backgroundGray" />
-          </td>
-          <td>
-            <Tag className="tagTable">ESCALATED</Tag>
-          </td>
-          <td>Prasanta Shivakrishnan</td>
-          <td>Guerra Corporation</td>
-          <td>PRHI-Z53</td>
-          <td>Bank trading</td>
-        </tr>
+        {dataTable.map((item, index) => (
+          <tr key={index}>
+            <td>{item.title}</td>
+            <td>
+              <div className={`square ${backgroundColor[item.square]}`} />
+            </td>
+            <td>
+              <Tag className="tagTable">{item.status}</Tag>
+            </td>
+            <td>{item.trader}</td>
+            <td>{item.counterparty}</td>
+            <td>{item.book}</td>
+            <td>{item.source}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

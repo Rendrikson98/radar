@@ -8,14 +8,17 @@ const initialState: SideMenuModel[] = [
     isOpen: false,
     options: [
       {
+        id: 0,
         name: 'Open',
         selected: false,
       },
       {
+        id: 1,
         name: 'Closed',
         selected: false,
       },
       {
+        id: 2,
         name: 'Escalated',
         selected: false,
       },
@@ -25,41 +28,48 @@ const initialState: SideMenuModel[] = [
     id: 1,
     name: 'Time',
     isOpen: false,
+    options: [],
   },
   {
     id: 2,
     name: 'Assignee',
     isOpen: false,
+    options: [],
   },
   {
     id: 3,
     name: 'Watcher',
     isOpen: false,
+    options: [],
   },
   {
     id: 4,
     name: 'Counterparty',
     isOpen: false,
+    options: [],
   },
   {
     id: 5,
     name: 'Saverity',
     isOpen: false,
+    options: [],
   },
   {
     id: 6,
     name: 'Source',
     isOpen: false,
+    options: [],
   },
   {
     id: 7,
     name: 'Trader',
     isOpen: false,
+    options: [],
   },
 ];
 
 const sideMenuSlice = createSlice({
-  name: 'OPEN_OR_CLOSE_PROPERTIES',
+  name: 'sideMenuSlice',
   initialState,
   reducers: {
     openOrCloseProperties(
@@ -68,8 +78,19 @@ const sideMenuSlice = createSlice({
     ) {
       state[action.payload].isOpen = !state[action.payload].isOpen;
     },
+    activeOption(
+      state: SideMenuModel[],
+      action: PayloadAction<{ indexPropertie: number; indexOption: number }>
+    ) {
+      state[action.payload.indexPropertie].options[
+        action.payload.indexOption
+      ].selected =
+        !state[action.payload.indexPropertie].options[
+          action.payload.indexOption
+        ].selected;
+    },
   },
 });
 
-export const { openOrCloseProperties } = sideMenuSlice.actions;
+export const { openOrCloseProperties, activeOption } = sideMenuSlice.actions;
 export default sideMenuSlice.reducer;

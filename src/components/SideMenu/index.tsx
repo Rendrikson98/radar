@@ -14,7 +14,10 @@ import {
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { SideMenuModel } from '../../models/sideMenuModel';
-import { openOrCloseProperties } from '../../store/features/sideMenuSlice';
+import {
+  activeOption,
+  openOrCloseProperties,
+} from '../../store/features/sideMenuSlice';
 
 import './styles.scss';
 
@@ -80,30 +83,42 @@ const Menu = () => {
         onChange={(event) => handleFilterProperties(event.target.value)}
       />
 
-      {sideMenuOption?.map((item) => {
-        console.log(item.isOpen);
-        return (
-          <ButtonGroup vertical>
-            <Button
-              large={true}
-              rightIcon={
-                <Icon icon="chevron-right" style={{ color: '#a4afb3' }} />
-              }
-              style={{ background: '#394b59', color: '#a4afb3' }}
-              text={item.name}
-              alignText="left"
-              onClick={() => handleButton(item.id)}
-            />
-            <Collapse isOpen={item.isOpen} className="collapseSideBar">
-              <Pre>
-                {item.options?.map((option) => (
-                  <Tag icon="small-cross">{option.name}</Tag>
-                ))}
-              </Pre>
-            </Collapse>
-          </ButtonGroup>
-        );
-      })}
+      {sideMenuOption?.map((item) => (
+        <ButtonGroup vertical key={item.id}>
+          <Button
+            large={true}
+            rightIcon={
+              <Icon icon="chevron-right" style={{ color: '#a4afb3' }} />
+            }
+            style={{ background: '#394b59', color: '#a4afb3' }}
+            text={item.name}
+            alignText="left"
+            onClick={() => handleButton(item.id)}
+          />
+          <Collapse isOpen={item.isOpen} className="collapseSideBar">
+            <Pre>
+              {item.options.map((option) => (
+                <Tag
+                  key={option.id}
+                  className={!option.selected ? 'tagSideMenu' : ''}
+                  icon="small-cross"
+                  onClick={() =>
+                    dispatch(
+                      activeOption({
+                        indexPropertie: item.id,
+                        indexOption: option.id,
+                      })
+                    )
+                  }
+                  intent={option.selected ? 'success' : 'none'}
+                >
+                  {option.name}
+                </Tag>
+              ))}
+            </Pre>
+          </Collapse>
+        </ButtonGroup>
+      ))}
     </nav>
   );
 };
