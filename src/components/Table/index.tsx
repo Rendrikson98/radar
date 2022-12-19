@@ -72,7 +72,7 @@ const Table = () => {
     setDataTable(sorted);
   };
 
-  const handleSortingChange = (column: ColumnsTable) => {
+  const handleSortingChange = (column: ColumnsTable): void => {
     const sortOrder = column === sortField && order === 'asc' ? 'desc' : 'asc';
     setSortField(column);
     setOrder(sortOrder);
