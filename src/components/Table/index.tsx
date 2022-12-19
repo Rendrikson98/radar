@@ -52,11 +52,21 @@ const Table = () => {
 
   const handleSorting = (sortField: ColumnsTable, sortOrder: OrderBy): void => {
     const sorted = [...dataTable].sort((a: DataModel, b: DataModel) => {
-      return (
-        a[sortField].toString().localeCompare(b[sortField].toString(), 'en', {
-          numeric: true,
-        }) * (sortOrder === 'asc' ? 1 : -1)
-      );
+      if (sortField === 'trader') {
+        return (
+          a[sortField].name
+            .toString()
+            .localeCompare(b[sortField].name.toString(), 'en', {
+              numeric: true,
+            }) * (sortOrder === 'asc' ? 1 : -1)
+        );
+      } else {
+        return (
+          a[sortField].toString().localeCompare(b[sortField].toString(), 'en', {
+            numeric: true,
+          }) * (sortOrder === 'asc' ? 1 : -1)
+        );
+      }
     });
 
     setDataTable(sorted);
@@ -186,7 +196,18 @@ const Table = () => {
               <td>
                 <Tag className="tagTable">{item.status}</Tag>
               </td>
-              <td>{item.trader}</td>
+              <td>
+                {item.trader.name}
+                {item.trader.count && (
+                  <Tag
+                    minimal={true}
+                    round={true}
+                    style={{ color: 'gray', marginLeft: '0.2rem' }}
+                  >
+                    +{item.trader.count}
+                  </Tag>
+                )}
+              </td>
               <td>{item.counterparty}</td>
               <td>{item.book}</td>
               <td>{item.source}</td>
