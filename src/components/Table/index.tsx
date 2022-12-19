@@ -140,59 +140,61 @@ const Table = () => {
   };
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th onClick={() => handleSortingChange('title')}>TITLE</th>
-          <th>
-            <Select2
-              items={['teste']}
-              itemRenderer={renderSquare}
-              noResults={
-                <MenuItem
-                  disabled={true}
-                  text="No results."
-                  roleStructure="listoption"
+    <div className="containerTable">
+      <table className="table">
+        <thead>
+          <tr>
+            <th onClick={() => handleSortingChange('title')}>TITLE</th>
+            <th>
+              <Select2
+                items={['teste']}
+                itemRenderer={renderSquare}
+                noResults={
+                  <MenuItem
+                    disabled={true}
+                    text="No results."
+                    roleStructure="listoption"
+                  />
+                }
+                onItemSelect={setSelectedScare}
+              >
+                <Button
+                  minimal={true}
+                  icon="error"
+                  rightIcon="caret-down"
+                  placeholder="Select a film"
+                  className="selectTable"
                 />
-              }
-              onItemSelect={setSelectedScare}
-            >
-              <Button
-                minimal={true}
-                icon="error"
-                rightIcon="caret-down"
-                placeholder="Select a film"
-                className="selectTable"
-              />
-            </Select2>
-          </th>
-          <th onClick={() => handleSortingChange('status')}>STATUS</th>
-          <th onClick={() => handleSortingChange('trader')}>TRADER</th>
-          <th onClick={() => handleSortingChange('counterparty')}>
-            COUNTERPARTY
-          </th>
-          <th onClick={() => handleSortingChange('book')}>BOOK</th>
-          <th onClick={() => handleSortingChange('source')}>SOURCE</th>
-        </tr>
-      </thead>
-      <tbody>
-        {dataTable.map((item, index) => (
-          <tr key={index}>
-            <td>{item.title}</td>
-            <td>
-              <div className={`square ${backgroundColor[item.square]}`} />
-            </td>
-            <td>
-              <Tag className="tagTable">{item.status}</Tag>
-            </td>
-            <td>{item.trader}</td>
-            <td>{item.counterparty}</td>
-            <td>{item.book}</td>
-            <td>{item.source}</td>
+              </Select2>
+            </th>
+            <th onClick={() => handleSortingChange('status')}>STATUS</th>
+            <th onClick={() => handleSortingChange('trader')}>TRADER</th>
+            <th onClick={() => handleSortingChange('counterparty')}>
+              COUNTERPARTY
+            </th>
+            <th onClick={() => handleSortingChange('book')}>BOOK</th>
+            <th onClick={() => handleSortingChange('source')}>SOURCE</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {dataTable.map((item, index) => (
+            <tr key={index}>
+              <td>{item.title}</td>
+              <td>
+                <div className={`square ${backgroundColor[item.square]}`} />
+              </td>
+              <td>
+                <Tag className="tagTable">{item.status}</Tag>
+              </td>
+              <td>{item.trader}</td>
+              <td>{item.counterparty}</td>
+              <td>{item.book}</td>
+              <td>{item.source}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   color: var(--gray-500);
+  background: var(--gray-50) !important;
 }
 
 .menuButtonSelected{
@@ -14,4 +15,9 @@
       color: var(--blue-400);
     }
   }
+}
+
+.buttonTakeAction{
+  font-weight: bold;
+  color: var(--gray-100);
 }

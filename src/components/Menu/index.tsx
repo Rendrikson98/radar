@@ -17,7 +17,7 @@ const Menu = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <Navbar className="navbarWrap" style={{ background: '#ecf1f5' }}>
+    <Navbar className="navbarWrap">
       <NavbarGroup
         align={Alignment.LEFT}
         style={{
@@ -57,7 +57,11 @@ const Menu = () => {
           <Button icon="caret-down" minimal={true} />
         </div>
         <div>
-          <Button text="Take Action" disabled={true} />
+          <Button
+            text="Take Action"
+            disabled={true}
+            className={'buttonTakeAction'}
+          />
         </div>
       </NavbarGroup>
     </Navbar>

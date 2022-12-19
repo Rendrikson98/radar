@@ -1,9 +1,16 @@
+.containerTable{
+  width: 100%;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .table{
-  width:100%;
+  width: 100%;
   border-collapse: collapse; 
   border-radius:0.375rem;
   box-shadow: 0px .063rem var(--gray-100);
-  overflow:hidden;
+  overflow: hidden;
 
   color: var(--gray-400);
   background: var(--white);

@@ -59,20 +59,20 @@ const Menu = () => {
       <Navbar className="navbarLeft" style={{ background: '#30404d' }}>
         <NavbarGroup align={Alignment.LEFT} style={{ width: '100%' }}>
           <NavbarHeading className="navHeading">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABOCAYAAAB/oXuQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASESURBVHgB7ZuNVdswEMcvLNBsUHeCZgRv0GxQj0AnSDYgnSBsQJnA6QTABIIJkk7wr4QU6ion6/yR2Bb83tODZ+vr/pYusnWa0ZkBMNd/Fi591Slzae7SkYNLzy496fQ4m812NEWM4Tpd61TqtEd3Sp0KnTIaO7qTuevwOSl1WtLYuJDxPkqngoZmION9FDpOkxm1ANbZrXS6FhYxDu9ep0eyTs/8PWind/DqzMg6S+NEc/rnSCVsdH0/6BIY1Z36MYxDXOuUUwd0+YVOG2GbCud2nrqB74h7+11Xw2vaX7r6Y+Kfx3HqileRxh/OZTzTlxzxkbGiPokIYJSX+oa++7W+iBARARQGXsAg7qO6CQE7B0PcwXr0wYFdod7V9PU7tcEpHHKCGxohsL8iHPtWI7ZmiI1SgCM1QqhGI1dnvglUdEcTAOGpcSOtIOtFyQGB9REqYEcuqSBUOKMJgbBPK2MFi4AAa5ogsN80mo2GwChQNGFgV7Ky0YDwmiCnCQO7xJbZBf67wI4SIGBb6WcK/SKM7zNWC2pGw7yaiXOIk/YFPuB/KV5f/K5cHm5tfU9p8ZO59u3tv8BQWVBCBKbE/nVKBG4mNRWOgJ8SuZkO3BN/ojThpvgiJMKO0uSRufbViPBZmDkFnplrX4wIX5gbB0oT7uF+NiJ8Ym48U5pwD3c+M+7Rv6p3clrtTE0Bzt4r+uBDBIMR4WSeYCKf0ZoSsOtgRPjD3EhSBOJ3uF9F4JbISb03VOAe7osR4YW5kVGacA9XGRHYpSSlSc5cewq+YlKCgP+QnB83KthXTEoI2IiXE8y9Kxc3xE2JnNKiYK79fvsP/CZFUlMiMBWKaoY5eHJKAIT3VDI/Y8lkKikBIN1TQZOdmglRY9cyVKBkMj/QhEHT/dUa1QaJTusKwkFnRaxgyRRqF/MzIKgJNpEUDo0GhTQiVTJpJaHgp6nHLMmDziJKyoKfBgLhoLPmu2qoj2McpRA1ArT3aQjHMBmmFNHaLc4C9UHUCuOPbV5TU7ini0tFkzcE9sVv37cARz+wYu7FhFC47HmHh0h/1kw5I1oWq/zWM6rw7i8RP/lS4kyxTpAdPNsz/a4eEiljDXCoqnqQn4Eyecx6o9OXa9evFWSHTJXX15BoeagxFWlg6zWwgRwF672vXcfMp665177x8Ebgpcu3RbPTtZtjna6esiZvyQlgOnALGSuvMYVh2cE9WVg7boTl+BEKa5REDIXKvINdTyhcFt/4FWQj561cbB6aIakEFapqhZAd2evKf0Yg/jPJlhMD+RPe4tR5FuhHkL2rxxg7r7RR9fh1mDwFdcEZtIYMMx8zpo7cGXHrDHrG6dPbu+s7l+/oROdMXSXiHE/o9re0R0t/0WP7i8GMD3RGCTqj+hADzX65trjkuwxa+osG9ffv8c8F5P5iKxFjUsZXQTN/cV1Tj3R0mTwFjREnRuzt7sQIDOnxz0WDJ1oiNeN9XMcVurHFxPY8ToDcX/iMx+n1hRPj17s03gdhf2GuJXH6TkxFjFenR+8VN0UG9/h/Aa5fiIg8bVdJAAAAAElFTkSuQmCC" />
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABTCAYAAAAiNXGsAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAT8SURBVHgB7ZyPldM4EMYn28Clg/NVsOngch1sB/gqYDtYUwF0YDqADhwq2KUChwpYKviQkEgUs9GM/tiRAr/35uXlORrJnyfSSJa9ooUAsFYfG2u3yhpra2s/eba2t/ZZ2dNqtdrRtaDFUHavbFD2FekMylplDdWIavjWnsScDMruqAYWEmTKqKylErmQIFNGlPIXg+lD3qIs3lIGVhQJzNUZyIwspbFX9p8ayfYUyQ1FoER5pT4eqUxRNI2yRyR0zsERoyp7UB8dxaHzkx95iWPP7pWFyXcaazrn2Sr7l+LplP83NCdaFMSxg8k/1pH1rm35j4jjgeYiUpQemUcK7U/Ze4STXxzl9A5h7DDz0GkFCo2gV5QL2wBpOq9/d08LAjPlCGlfQzmASZwkjLhQgmUvXkg7o/o6t0Jp8vaIC2edVpxHYXvjk0BbkVSUtCuQCZjRSyrOlmKALDT1bxoqCMj/VgOFApMzcOTryDID+YCxDfErjZZFR59QYEYrDnnUQJazfKQKgGwpZJvTWUMVANkAwkeN0FFPFQHZ9GHNOZF0ug1VhPBi33NOBsZBFX3LFMF5DZwDjpYqBPw/QQ/t63OFtwJhishwQ4HJiLm8ZuuWcZc2N4z/T2ol7JkqxLb7ifnZyfmHCLOjuvnMHL91v7jC/O0vxypeOlz7/3G/3Jw78AJ7qhtOmJPAcIX5y1+uemG4/vFkYDncPtHdsq+U6sCib86VQsg5Rt1w+x34I8wZXGG8/0HUulnHIkhOT87fFeabvxxVmfU6NMzxs8KM/nJsAlg6DXP8i/vl5tyBF6hdGK79J4HhCsMlQLdUN9yOiZMpQ4gwm5pn12S2k/h4OltYMDVvqUIgWJmcljlEjHBqnm+3wLLcMcc/eY9Cdi+moYqAbM235ZysBU6u8S5BI3E0ZHFUAJBFy07qTLL2G35D/AKodn4QnIt8ZydkUXMN965HCgGyqLmG3Q4thQJZ1IyliQP5/piwaHEqkESNptYdVQ3Fogq/E1ZS2x68d5SCvQKjsLLxUuIgcNcm5QB/9vl6K2cnYRM+AIvsDB8QhjxnCWhIh3D63AIh/lmCjuYiUhyNjiAddalPnwyIo6NAYp5X6tRHypMcOzLTfL3Esdfm7qKAibDpM9obil+Mf6P8d5QCTJg2gt/pnZ05nqOeE92+ljkPHYn6b9lxJ/xgnfZgBELYELk0IzzthxHkAceL691R9dKJ9uAFkiaBS6Hbs/a099zw3p0r4Ovpe/ivQAnRs4NnMzPMFGf0lP81aiBb0Blhwq/xVN5ieYEkggxCX31ItEwZwXdqd7bBc8IJEpMAajaugxhG8AJp3y3yiPTV+tF9hK8PSX17wI/VyRXM3Cblsf89mVzhPfdDmCv8Mz9prOmdXNP3x3yj4/tjDs9o+3aNWrFeK7un+Jxnr+z/w7tqwHdMEkbEPjWWCMImki/hn/wiT+c5YKHlB6RfUC1IB+lUBXkE6jGTQMjzWhZvvsM1oCiBYDpzyS0RH7ss7bGN0eE2Io0+tkE4pvApeIf3aBC/DuIywpygKITx65wmts78C1Q0n0AtU0+L9JGmo6WZSyCkd6xhI81cWIFSM9sRx/flpdCjtLujyJMkxjJPx5oTLDvDLl+QKTMLNKLS/YAHMgtURseaC6QnidclyBTEDfE9Kn/AQ4xQoPo61lycEej3FWQKjkliS4XwHQ5+WzAkYtSAAAAAAElFTkSuQmCC" />
             Radar
           </NavbarHeading>
           <div className="iconsWrap">
-            <Icon icon="user" style={{ color: '#a4afb3' }} />
-            <Icon icon="notifications" style={{ color: '#a4afb3' }} />
-            <Icon icon="help" style={{ color: '#a4afb3' }} />
+            <Icon icon="user" />
+            <Icon icon="notifications" />
+            <Icon icon="help" />
           </div>
         </NavbarGroup>
       </Navbar>
       <Navbar className="headerOpenFlags">
         <NavbarGroup align={Alignment.LEFT} style={{ width: '100%' }}>
           <Button
-            icon={<Icon icon="chevron-left" style={{ color: '#a4afb3' }} />}
+            icon={<Icon icon="chevron-left" />}
             minimal={true}
             text="Sets"
           />
@@ -81,7 +81,7 @@ const Menu = () => {
       </Navbar>
 
       <InputGroup
-        leftIcon={<Icon icon="filter" style={{ color: '#8a9aa7' }} />}
+        leftIcon={<Icon icon="filter" />}
         large={true}
         placeholder="Filter Properties..."
         className="filter"
