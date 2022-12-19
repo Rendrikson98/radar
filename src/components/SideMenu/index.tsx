@@ -30,6 +30,7 @@ const Menu = () => {
 
   const [sideMenuOption, setSideMenuOption] =
     useState<SideMenuModel[]>(sideMenuInformation);
+  const [filterProperties, setFilterProperties] = useState<string>('');
 
   const handleButton = (index: number): void => {
     dispatch(openOrCloseProperties(index));
@@ -42,13 +43,15 @@ const Menu = () => {
       );
 
       setSideMenuOption(result);
+      setFilterProperties(name);
     } else {
       setSideMenuOption(sideMenuInformation);
+      setFilterProperties('');
     }
   };
 
   useEffect(() => {
-    setSideMenuOption(sideMenuInformation);
+    handleFilterProperties(filterProperties);
   }, [sideMenuInformation]);
 
   return (
