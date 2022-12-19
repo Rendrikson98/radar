@@ -13,7 +13,6 @@ import {
 } from '@blueprintjs/core';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { menuModel } from '../../models';
 import { SideMenuModel } from '../../models/sideMenuModel';
 import {
   activeOption,
@@ -67,15 +66,16 @@ const Menu = () => {
           </div>
         </NavbarGroup>
       </Navbar>
-
-      <div className="headerOpenFlags">
-        <Button
-          icon={<Icon icon="chevron-left" style={{ color: '#a4afb3' }} />}
-          minimal={true}
-          text="Sets"
-        />
-        <p>Open Flags</p>
-      </div>
+      <Navbar className="headerOpenFlags">
+        <NavbarGroup align={Alignment.LEFT} style={{ width: '100%' }}>
+          <Button
+            icon={<Icon icon="chevron-left" style={{ color: '#a4afb3' }} />}
+            minimal={true}
+            text="Sets"
+          />
+          <p>Open Flags</p>
+        </NavbarGroup>
+      </Navbar>
 
       <InputGroup
         leftIcon={<Icon icon="filter" style={{ color: '#8a9aa7' }} />}

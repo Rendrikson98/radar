@@ -26,6 +26,12 @@
   th{
     border-bottom: 0.063rem solid var(--gray-200);
     padding: 0.625rem 1.875rem 0.625rem 1.25rem;
+    cursor: pointer;
+    transition: filter 0.5s;
+    
+    &:hover{
+      filter: brightness(0.1);
+    }
   }
 
   td{

@@ -33,7 +33,7 @@ const Menu = () => {
             placeholder="Search for Alerts..."
             rightElement={
               <Tag minimal={true} round={true}>
-                {Math.floor(10000 / Math.max(1, Math.pow(2, 2)))}
+                {menuInformation.searchTitle.length}
               </Tag>
             }
             onChange={(event) =>

@@ -2,7 +2,7 @@ import { Button, MenuItem, Tag } from '@blueprintjs/core';
 import { Select2 } from '@blueprintjs/select';
 import { ItemRenderer } from '@blueprintjs/select/lib/esm/common';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { DataModel, menuModel, SideMenuModel } from '../../models';
 import { data } from '../../services/data';
 
@@ -13,13 +13,23 @@ type VerifyFilterPropertirType = {
   properties: Array<string>;
 };
 
+type OrderBy = 'asc' | 'desc';
+
+type ColumnsTable =
+  | 'title'
+  | 'status'
+  | 'trader'
+  | 'counterparty'
+  | 'book'
+  | 'source';
+
 const Table = () => {
   const sideMenuInformation: SideMenuModel[] = useAppSelector(
     (state) => state.sideMenuState
   );
   const menuInformation: menuModel = useAppSelector((state) => state.menuState);
 
-  const [selectedFilm, setSelectedFilm] = useState<string>();
+  const [selectedFilm, setSelectedScare] = useState<string>();
   const [dataTable, setDataTable] = useState<DataModel[]>(data);
 
   const verifyFilterPropertie = (): VerifyFilterPropertirType => {
@@ -35,6 +45,28 @@ const Table = () => {
       isActivePropertie: properties.length > 0,
       properties,
     };
+  };
+
+  const [sortField, setSortField] = useState<string>('');
+  const [order, setOrder] = useState<OrderBy>('asc');
+
+  const handleSorting = (sortField: ColumnsTable, sortOrder: OrderBy): void => {
+    const sorted = [...dataTable].sort((a: DataModel, b: DataModel) => {
+      return (
+        a[sortField].toString().localeCompare(b[sortField].toString(), 'en', {
+          numeric: true,
+        }) * (sortOrder === 'asc' ? 1 : -1)
+      );
+    });
+
+    setDataTable(sorted);
+  };
+
+  const handleSortingChange = (column: ColumnsTable) => {
+    const sortOrder = column === sortField && order === 'asc' ? 'desc' : 'asc';
+    setSortField(column);
+    setOrder(sortOrder);
+    handleSorting(column, sortOrder);
   };
 
   useEffect(() => {
@@ -81,8 +113,8 @@ const Table = () => {
     }
   }, [sideMenuInformation, menuInformation]);
 
-  const renderFilm: ItemRenderer<string> = (
-    film,
+  const renderSquare: ItemRenderer<string> = (
+    square,
     { handleClick, handleFocus, modifiers, query }
   ) => {
     if (!modifiers.matchesPredicate) {
@@ -92,11 +124,11 @@ const Table = () => {
       <MenuItem
         active={modifiers.active}
         disabled={modifiers.disabled}
-        key={film}
+        key={square}
         onClick={handleClick}
         onFocus={handleFocus}
         roleStructure="listoption"
-        text={film}
+        text={square}
       />
     );
   };
@@ -106,15 +138,16 @@ const Table = () => {
     orange: 'backgroundOrange',
     gray: 'backgroundGray',
   };
+
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>TITLE</th>
+          <th onClick={() => handleSortingChange('title')}>TITLE</th>
           <th>
             <Select2
               items={['teste']}
-              itemRenderer={renderFilm}
+              itemRenderer={renderSquare}
               noResults={
                 <MenuItem
                   disabled={true}
@@ -122,7 +155,7 @@ const Table = () => {
                   roleStructure="listoption"
                 />
               }
-              onItemSelect={setSelectedFilm}
+              onItemSelect={setSelectedScare}
             >
               <Button
                 minimal={true}
@@ -133,11 +166,13 @@ const Table = () => {
               />
             </Select2>
           </th>
-          <th>STATUS</th>
-          <th>TRADER</th>
-          <th>COUNTERPARTY</th>
-          <th>BOOK</th>
-          <th>SOURCE</th>
+          <th onClick={() => handleSortingChange('status')}>STATUS</th>
+          <th onClick={() => handleSortingChange('trader')}>TRADER</th>
+          <th onClick={() => handleSortingChange('counterparty')}>
+            COUNTERPARTY
+          </th>
+          <th onClick={() => handleSortingChange('book')}>BOOK</th>
+          <th onClick={() => handleSortingChange('source')}>SOURCE</th>
         </tr>
       </thead>
       <tbody>

@@ -46,19 +46,12 @@
 }
 
 .headerOpenFlags{
-  padding: 1rem 1rem 1rem 0.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--gray-500);
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  background: var(--gray-500) !important;
 
   button{
     span{
       color: var(--gray-100);
-      
+      margin-left: -1rem;
       & + span{
         margin-left: -0.4rem;
       }
@@ -67,10 +60,12 @@
   p{
     width: 100%;
     margin: 0;
+    margin-left: -2rem;
     text-align: center;
-    color: var(--white);
+    color: var(--gray-100);
     font-weight: bold;
     text-transform: uppercase;
+    font-size: 0.8rem;
   }
 }
 
